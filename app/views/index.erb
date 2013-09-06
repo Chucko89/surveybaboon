@@ -1,4 +1,5 @@
 <div class="container">
+
   <h1>Welcome to Survery Baboon!</h1>
   <h3><%= "These are the params: #{params.inspect}" %></h3>
   <br>
@@ -7,7 +8,9 @@
   <% @message = "you are already logged in" if current_user %>
   <% unless current_user %>
    <%= erb :__signup %>
-   <%= erb :__login %>
+   <%= erb :__login %> 
+
    <% end %>
 
+ 
  
