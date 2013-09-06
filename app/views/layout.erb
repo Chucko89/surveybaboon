@@ -18,6 +18,11 @@
   <title></title>
 </head>
 <body>
+  <% if current_user  %>
+    <div class="navbar">
+      <a href="/logout">Logout<a>
+    </div>
+    <% end %>
   <%= yield %>
 </body>
 </html>
