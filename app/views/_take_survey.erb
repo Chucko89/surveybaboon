@@ -1,0 +1,9 @@
+<div id="take_survey">
+  <h3> <%= @survey.title %> </h3>
+  <form action="/survey/submit/<%= @survey.id %>" method="POST">
+      <%= erb :_question_choices, :layout => false %>
+    <input type="submit" value="Finish survey">
+  </form>
+
+
+</div>

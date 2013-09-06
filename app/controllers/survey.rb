@@ -1,4 +1,11 @@
+['/user_profile', '/create_survey', '/survey/*'].each do |path|
+  before path do
+    redirect '/' unless logged?
+  end
+end
+
 get '/user_profile' do
+  @surveys = Survey.all
   
   erb :profile
 end
@@ -9,7 +16,7 @@ get '/create_survey' do
 end
 
 post '/create_survey' do
-  survey = Survey.new(title: params[:title], user_id: 1)
+  survey = Survey.new(title: params[:title], user_id: current_user.id)
 
   if survey.save
     session[:survey_id] = survey.id
@@ -52,8 +59,23 @@ post '/survey/question/create_choices' do
   end
 end
 
+get '/survey/take_survey/:survey_id' do
+  @survey = Survey.find(params[:survey_id])
+  @questions = @survey.questions
 
-# get '/my_surveys' do
+  erb :_take_survey
+end
 
-#   erb :
-# end  
+post '/survey/submit/:survey_id' do
+  # ABLE TO SELECT MULTIPLE RADIO BUTTONS
+  params[:choice].each do |k, v|
+    selection = Selection.new(user_id: current_user.id, choice_id: v)
+    unless selection.save
+      "ERROR"
+    end
+  end
+  
+  redirect "/user_profile"
+
+end
+
