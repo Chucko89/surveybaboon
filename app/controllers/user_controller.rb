@@ -18,7 +18,7 @@ post '/signup' do
 end
 
 post '/login' do
-  current_id = User.login(params[:email],params[:password])
+  current_id = User.authenticate(params[:email],params[:password])
   
   if current_id
     session[:user_id] = current_id
