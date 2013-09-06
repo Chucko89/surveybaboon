@@ -1,6 +1,6 @@
 <% @questions.each do |q| %><br>
   <%= q.prompt %><br>
   <% q.choices.each do |c| %>
-    <input type="radio" name="choice[<%= c.id %>]" value="<%= c.option %>"><%= c.option %><br>
+    <input type="radio" name="choice[<%= q.id %>]" value="<%= c.id %>"><%= c.option %><br>
   <% end %>
 <% end %><br>

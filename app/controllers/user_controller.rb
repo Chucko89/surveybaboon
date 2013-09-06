@@ -1,3 +1,7 @@
+# before do
+#  erb :index unless logged?
+# end
+
 get '/' do
   @message = "arriving from get '/' "
   erb :index
