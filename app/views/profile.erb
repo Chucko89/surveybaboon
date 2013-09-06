@@ -1,1 +1,10 @@
 <a href="/create_survey">CREATE SURVEY</a>
+
+<div id="choose_surveys">
+<p> Choose a survey: </p>
+  <ul>
+    <% @surveys.each do |s| %>
+      <li><a href="/survey/take_survey/<%=s.id%>"><%= s.title %></a></li><br>
+    <% end %>
+  </ul>
+</div>
