@@ -1,16 +1,20 @@
-<div class="container">
 
-  <h1>Welcome to Survery Baboon!</h1>
-  <h3><%= "These are the params: #{params.inspect}" %></h3>
+<div class="main">
+
+<div class="inside_main">
+
+  <h1><font color="Red">Welcome to Survey Baboon!</font></h1>
   <br>
-  <h3><%= "The messages: #{@message}" %></h3>
-  <br>
-  <% @message = "you are already logged in" if current_user %>
   <% unless current_user %>
    <%= erb :__signup %>
    <%= erb :__login %> 
 
    <% end %>
+</div>
 
+
+<div class="baboon">
+<image src="cyborg.jpg">
+</div>
  
- 
+ </div>

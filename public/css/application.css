@@ -1,9 +1,36 @@
 .container {
+
   margin: 20px auto;
-  width: 600px;
   padding: 0px 20px 20px 20px;
   border: 1px dotted black;
+
 }
 th {
   text-align: left;
+}
+
+
+#signup_errors {
+color:red;
+}
+
+.main {
+  position:fixed;
+  background-color:black;
+  display:inline-block;
+  margin-top: 100px;
+  margin-left: 150px;
+  padding: 0px 20px 20px 20px;
+  border: 1px dotted black;
+}
+
+.inside_main 
+{
+float:left;
+}
+
+
+.baboon{
+  float:right;
+
 }
