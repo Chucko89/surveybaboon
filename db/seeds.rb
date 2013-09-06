@@ -1,4 +1,4 @@
-our_user = User.create(email: "my@email.com", hash_password: "password")
+our_user = User.create(email: "my@email.com", password_hash: "password")
 our_survey = Survey.create(title: "survey title", user_id: our_user.id)
 question1 = Question.create(prompt: "Do you like dogs?", survey_id: our_survey.id)
 question2 = Question.create(prompt: "Do you like cats?", survey_id: our_survey.id)
