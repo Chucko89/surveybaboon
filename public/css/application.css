@@ -23,13 +23,9 @@ color:red;
   border: 1px dotted black;
 }
 
-.inside_main 
-{
-float:left;
-}
-
-
-.baboon{
-  float:right;
-
+body {
+  background-image: url('../rafikidisney.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: right bottom;
 }
