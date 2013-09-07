@@ -1,8 +1,4 @@
-['/user_profile', '/create_survey', '/survey/*'].each do |path|
-  before path do
-    redirect '/' unless logged?
-  end
-end
+
 
 get '/user_profile' do
   @surveys = Survey.all

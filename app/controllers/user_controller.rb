@@ -1,18 +1,25 @@
+before do
+  unless logged? || request.path == '/' || request.path == '/signup' || request.path == '/login'
+    redirect '/'
+  end
+end
 
 get '/' do
-  @message = "arriving from get '/' "
+  redirect '/user_profile' if logged? 
+
   erb :index
 end
 
 post '/signup' do
-  begin
+
   this_user = User.new(email: params[:email])
-  this_user.password =  params[:password]
-  this_user.save!
-  session[:user_id] = this_user.id
-  redirect '/user_profile'
-  rescue Exception => e
-    @message = e.message
+  this_user.password = (params[:password])
+  if this_user.save
+    session[:user_id] = this_user.id
+    redirect '/user_profile'
+    erb :index
+  else
+    @errors = this_user.errors.full_messages
     erb :index
   end
 

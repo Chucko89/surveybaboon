@@ -44,8 +44,8 @@ if (password.length > 7){}
 //     };
 
 if (validates) {
-    $("input[name='sign_up']").submit()
-    $('#errors').append("<li id='ok'>FORM SUBMITTED SUCCESFULLY</li>");
+    $('form#signup').submit()
+    $('#signup_errors').append("<li id='ok'>FORM SUBMITTED SUCCESFULLY</li>");
  
   };
  

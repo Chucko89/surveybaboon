@@ -4,15 +4,21 @@ class User < ActiveRecord::Base
   has_many :questions, through: :surveys
   has_many :choices, through: :questions
 
+  validates :email, uniqueness: true
+  validates :email, presence: true
+  validates_format_of :email, with: /.+@.+\..{2,3}/
+
+  validates :password, presence: true
+  validates :password, length: { minimum: 3 }
+
+  attr_reader :password
+
  include BCrypt
 
-  def password
-    @password ||= Password.new(password_hash)
-  end
 
   def password=(new_password)
-    @password = Password.create(new_password)
-    self.password_hash = @password
+    @password = new_password
+    self.password_hash = Password.create(new_password)
   end
 
   def self.authenticate(email,password)
