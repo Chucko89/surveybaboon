@@ -8,3 +8,12 @@
     <% end %>
   </ul>
 </div>
+
+<div id="created_surveys">
+<p> See results for surveys you created: </p>
+  <ul>
+    <% @created_surveys.each do |c| %>
+      <li><a href="#"><%= c.title %></a></li>
+    <%end%>
+  </ul>
+</p>
