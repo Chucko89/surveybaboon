@@ -14,6 +14,10 @@ th {
 color:red;
 }
 
+#login_errors {
+color:red;
+}
+
 .main {
   padding: 0 0 0 80px;
   bottom: 200px;
