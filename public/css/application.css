@@ -15,12 +15,17 @@ color:red;
 }
 
 .main {
-  position:fixed;
-  display:inline-block;
-  margin-top: 100px;
-  margin-left: 150px;
-  padding: 0px 20px 20px 20px;
-  border: 1px dotted black;
+  padding: 0 0 0 80px;
+  bottom: 200px;
+  height: 350px;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 550px;
+  border-radius: 15px;
+  background-color: #d9e5f2;
 }
 
 body {
@@ -28,4 +33,13 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: right bottom;
+}
+
+#frontpage_button {
+  background: #519eec;
+  border-radius: 10px;
+}
+
+#password {
+  width: 150px;
 }
