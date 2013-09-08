@@ -1,0 +1,48 @@
+<form action="/create_survey" method="POST" id="create_survey">
+  <p>Survey Title</p>
+  <input type="text" id="title" name="survey[:title]" placeholder="Enter a Title"></br>
+  <p id="prepend"></p>
+  <button id="add_question">Add Question</button>
+  <button id="add_choice">Add Choice</button></br></br>
+  <input id="survey_submit" type="submit" value="Create Survey">
+</form>
+<a href="/user_profile">Click here if finished</a>
+
+<script>
+var question_count = 1
+var choice_count = 1
+
+$("#add_question").on("click", function(e){
+	e.preventDefault();
+	console.log("In ADD QUESTION");
+	$.ajax({
+		type: "GET",
+		url: '/survey/create_question',
+		data: { question_count: question_count }
+	}).done(function(server_data){
+		console.log("success add question");
+		$("#prepend").append(server_data);
+		question_count += 1
+		choice_count = 1
+	}).fail(function(){
+		console.log("fail add_question");
+	});
+});
+
+$("#add_choice").on("click", function(e){
+	e.preventDefault();
+	$.ajax({
+	  type: "GET",
+      url: '/survey/question/create_choice',
+      data: { choice_count: choice_count, question_count: (question_count - 1) }
+	}).done(function(server_data){
+		console.log("success add choice");
+		$("#prepend").append(server_data);
+		choice_count += 1
+	}).fail(function(){
+		console.log("fail add choice");
+	});
+});
+
+
+</script>

@@ -1,4 +1,4 @@
-
+require 'pry'
 
 get '/user_profile' do
   @surveys = Survey.all
@@ -9,51 +9,40 @@ end
 
 get '/create_survey' do
 
-  erb :_create_survey  
+  erb :create_survey  
 end
 
 post '/create_survey' do
-  survey = Survey.new(title: params[:title], user_id: current_user.id)
 
-  if survey.save
-    session[:survey_id] = survey.id
-    redirect "/survey/create_questions"
-  else
-    "BLAHBLAHB LAH ERROR /create_survey"
+  survey = Survey.new(title: params[:survey][":title"], user_id: session[:user_id])
+  survey.save
+
+  params[:question].first.each_with_index do |prompt_array, index|
+    question = Question.new(prompt: prompt_array[1], survey_id: survey.id)
+    if question.save
+      params[:choice][(index + 1).to_s].each do |option_array|
+        choice = Choice.new(option: option_array[1], question_id: question.id)
+        choice.save
+      end
+    else
+      "ERROR SAVING QUESTION"
+    end
   end
+  redirect "/user_profile"
 end
 
-get '/survey/create_questions' do
+get '/survey/create_question' do
 
-  erb :_create_question
+  @question_count = params[:question_count]
+
+  erb :_create_question, layout: false
 end
 
-post '/survey/create_question' do
-  question = Question.new(prompt: params[:prompt], survey_id: session[:survey_id])
+get '/survey/question/create_choice' do
+  @choice_count = params[:choice_count]
+  @question_count = params[:question_count]
 
-  if question.save
-    session[:question_id] = question.id
-    redirect "/survey/question/create_choices"
-  else
-    "ERROR /survey/create_question"
-  end
-end
-
-get '/survey/question/create_choices' do
-  # show the question that these choices are being created for, better
-  # user experience.
-  erb :_create_choice
-end
-
-post '/survey/question/create_choices' do
-  choice1 = Choice.new(option: params[:choice1], question_id: session[:question_id])
-  choice2 = Choice.new(option: params[:choice2], question_id: session[:question_id])
-
-  if choice1.save && choice2.save
-    redirect "/survey/create_questions"
-  else
-    "ERROR: A choice didn't save"
-  end
+  erb :_create_choice, layout: false
 end
 
 get '/survey/take_survey/:survey_id' do
