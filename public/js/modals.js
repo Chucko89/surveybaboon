@@ -12,7 +12,30 @@ Modal.prototype = {
   }
 }
 
+function greatFunction(){
+    var chart = new CanvasJS.Chart("chartContainer", {
+      title:{
+        text: "Fruits sold in First Quarter"
+      },
+      data: [//array of datSeries]
+        {
+          type: "column",
+          dataPoints: [
+          { label: "banana", y: 12 },
+          { label: "orange", y: 20 },
+          { label: "apple", y: 40 },
+          { label: "mango", y: 34 },
+          { label: "grape", y: 24 }
+          ]
+        }
+      ]
+    });
+    chart.render();
+  };
+
 $(document).ready(function(){
+  // greatFunction();
+
   $('#created_surveys a').on('click', function(e){
     e.preventDefault();
     $('#survey_stats').remove();

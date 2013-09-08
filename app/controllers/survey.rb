@@ -78,6 +78,7 @@ end
 
 get '/created_surveys/:id' do
   @survey = Survey.find(params[:id])
-
+  @questions = @survey.questions
+  
   erb :_survey_stats, :layout => false
 end
