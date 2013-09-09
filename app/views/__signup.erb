@@ -1,5 +1,13 @@
 <h2><font color="grey">Click to signup</font></h2>
-<ul id="signup_errors"></ul>
+<ul id="signup_errors">
+<font color='red'>
+  <% if @signup_errors %>
+  <li><%= "please enable javascript" %></li>
+  <% @signup_errors.each do |error| %>
+  <li><%= error %></li>
+  <% end %><% end %>
+</font></ul>
+
 <form action="/signup" method="post" id="signup">
   <input type="text" name="email" placeholder="Enter your email">
   <input type="password" name="password" placeholder="Enter your password" id="password">

@@ -8,28 +8,33 @@ get '/user_profile' do
 end
 
 get '/create_survey' do
-
+@survey_errors = params[:msg]
   erb :create_survey  
 end
 
 post '/create_survey' do
-
   survey = Survey.new(title: params[:survey][":title"], user_id: session[:user_id])
-  survey.save
+   
+   if !survey.save 
+    redirect "/create_survey?msg=#{survey.errors.full_messages.first}"
+  end
 
   params[:question].first.each_with_index do |prompt_array, index|
     question = Question.new(prompt: prompt_array[1], survey_id: survey.id)
     if question.save
       params[:choice][(index + 1).to_s].each do |option_array|
         choice = Choice.new(option: option_array[1], question_id: question.id)
-        choice.save
+        redirect "create_survey?msg=#{choice.errors.full_messages.first}" if !choice.save
       end
     else
-      "ERROR SAVING QUESTION"
+      redirect "create_survey?msg=#{question.errors.full_messages.first}"
     end
   end
   redirect "/user_profile"
 end
+
+
+
 
 get '/survey/create_question' do
 

@@ -6,7 +6,8 @@ end
 
 get '/' do
   redirect '/user_profile' if logged? 
-  @msg = params[:msg]
+  @login_errors = params[:msg]
+  @signup_errors = params[:msg2]
 
   erb :index
 end
@@ -20,7 +21,7 @@ post '/signup' do
     redirect '/user_profile'
     erb :index
   else
-    @errors = this_user.errors.full_messages
+    @signup_errors = this_user.errors.full_messages
     erb :index
   end
 
@@ -34,8 +35,7 @@ post '/login' do
     session[:user_id] = current_id
     redirect '/user_profile'
   else
-  @message = "incorrect username or password"
-  redirect "/?msg=#{@message}"
+  redirect "/?msg='incorrect username or password'"
 end
 
 end

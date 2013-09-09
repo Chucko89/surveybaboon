@@ -3,6 +3,5 @@ class Survey < ActiveRecord::Base
   has_many :questions
   has_many :choices, through: :questions
   has_many :selections, through: :choices
-
-  validates :title, presence: true
+  validates :title, presence: true, uniqueness:true
 end
