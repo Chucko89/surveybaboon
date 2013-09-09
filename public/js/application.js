@@ -6,7 +6,7 @@ function test_pass_num(input_password){return input_password.match(/\d/);}
 // function test_pass_caps(input_password){return input_password.match(/[A-Z]+/)};
 function unbind(validation){
   if (validation){
-  $('#signup_errors').append("<li>'Succesful Signup'</li>");
+  $('#signup_errors').append("<li>'Processing...'</li>");
   $('form#signup').unbind('submit');
   $('form#signup').submit();
   }
@@ -61,6 +61,7 @@ $('form#signup').on('submit',function(e){
 
 $('#login').on('submit',function(e){
   e.preventDefault();
+  validation = true
 
   $('#login_errors').html('');
 
@@ -87,7 +88,7 @@ $('#login').on('submit',function(e){
     }
 
   if (validation){
-    $('#login_errors').append("<li>'Succesful Signup'</li>");
+    $('#login_errors').append("<li>'Processing...'</li>");
     $('#login').unbind('submit');
     $('#login').submit();
   }

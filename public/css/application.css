@@ -30,6 +30,7 @@ color:red;
   width: 550px;
   border-radius: 15px;
   background-color: #d9e5f2;
+  overflow: auto;
 }
 
 body {

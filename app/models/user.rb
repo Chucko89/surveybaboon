@@ -11,10 +11,12 @@ class User < ActiveRecord::Base
   validates :password, presence: true
   validates :password, length: { minimum: 3 }
 
-  attr_reader :password
 
  include BCrypt
-
+  
+  def password
+      @password ||= Password.new(password_hash)
+  end
 
   def password=(new_password)
     @password = new_password
@@ -23,8 +25,10 @@ class User < ActiveRecord::Base
 
   def self.authenticate(email,password)
     @user = User.find_by_email(email)
-    
     return nil unless @user
+    p "user.password and passowrd"
+    p @user.password
+    p password
     @user.password == password ? @user.id : nil
   end
 end

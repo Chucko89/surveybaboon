@@ -6,6 +6,7 @@ end
 
 get '/' do
   redirect '/user_profile' if logged? 
+  @msg = params[:msg]
 
   erb :index
 end
@@ -26,14 +27,15 @@ post '/signup' do
 end
 
 post '/login' do
-  current_id = User.authenticate(params[:email],params[:password])
-  
+  current_id = User.authenticate(params[:login_email],params[:login_password])
+  p "current is: #{current_id}"
+
   if current_id
     session[:user_id] = current_id
     redirect '/user_profile'
   else
   @message = "incorrect username or password"
-  erb :index
+  redirect "/?msg=#{@message}"
 end
 
 end
