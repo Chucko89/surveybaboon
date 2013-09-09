@@ -1,5 +1,6 @@
 require 'pry'
 
+
 get '/user_profile' do
   @surveys = Survey.all
   @created_surveys = user_surveys

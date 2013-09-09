@@ -1,10 +1,9 @@
 <div id="survey_stats">
-  <p><%= "Survey: " + @survey.title %></p>
+  <h3><%= "Survey: " + @survey.title %></h3>
     <% @questions.each do |q| %>
-      <p><%= "For question: '" + q.prompt + "':" %></p>
+      <p><%= "For question: '" + q.prompt %></p>
         <% choices_for_questions(q).each do |c| %>
-          <%= "'" + c.option + "' was chosen by " + selection_amount(c).to_s + " user(s)." %><br>
+          <%= "'" + c.option + "' was chosen by " + selection_amount(c).to_s + " user(s)" %><br>
         <% end %>
       <% end %>
 </div>
-
